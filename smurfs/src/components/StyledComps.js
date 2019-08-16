@@ -33,7 +33,13 @@ export const SmurfForm = styled.form`
     {
         background: skyblue;
         text-align: center;
+        &[type='number']
+        {
+            padding-left: 13px;
+            width: 156px;
+        }
     }
+    
     
 `;
 

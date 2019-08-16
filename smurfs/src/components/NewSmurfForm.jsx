@@ -1,6 +1,6 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import {useSelector, useDispatch} from "react-redux"
-import {getSmurfs, postSmurfs} from "../actions"
+import {getSmurfs, postSmurfs, putSmurfs} from "../actions"
 import { SmurfForm, SmurfButton } from './StyledComps'
 
 const NewSmurfForm = _ =>
@@ -9,6 +9,16 @@ const NewSmurfForm = _ =>
     const state = useSelector(state => state)
 
     const [smurfInput, setSmurfInput] = useState({name: '', age: '', height: '', id: state.smurfs.length})
+    
+    useEffect(_ =>
+        {
+            console.log('inf loop?', state)
+            if(state.isEditing && (state.edtiginID || state.editingID >= 0)) 
+            {
+                console.log('smurf to edit', state.smurfs[state.editingID])
+                setSmurfInput(state.smurfs[state.editingID]) 
+            }
+        }, [state.isEditing, state.editingID])
 
     const getBtnClick = event =>
     {
@@ -26,8 +36,16 @@ const NewSmurfForm = _ =>
     {
         console.log('newSmurf', smurfInput)
         event.preventDefault()
-        await dispatch(postSmurfs(smurfInput))
+        if(!state.isEditing)
+        {
+            await dispatch(postSmurfs(smurfInput))
+        }
+        else
+        {
+            await dispatch(putSmurfs(smurfInput))
+        }
         dispatch(getSmurfs())
+        setSmurfInput({...smurfInput, name: '', age: '', height: ''})
     }
 
     return (
@@ -40,13 +58,13 @@ const NewSmurfForm = _ =>
             </label>
             <label>
                 Smurf Age:
-                <input type="number" name="age" value={smurfInput.age} onChange={handleChange}/>
+                <input type="number" name="age" className="num" value={smurfInput.age} onChange={handleChange}/>
             </label>
             <label>
                 Smurf Height:
                 <input type="text" name="height" value={smurfInput.height} onChange={handleChange}/>
             </label>
-            <SmurfButton type="submit" onClick={handleSubmit}>Submit Smurf!</SmurfButton>
+            <SmurfButton type="submit" onClick={handleSubmit}>{state.isEditing ? `Edit Smurf!` : `Submit Smurf!`}</SmurfButton>
         </SmurfForm>
         </>
     )

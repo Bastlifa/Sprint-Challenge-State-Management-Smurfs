@@ -5,8 +5,13 @@ import {
     POST_SMURF_START,
     POST_SMURF_SUCCESS,
     POST_SMURF_FAIL,
+    SET_SMURF_EDITING,
+    PUT_SMURF_START,
+    PUT_SMURF_SUCCESS,
+    PUT_SMURF_FAIL,
     getSmurfs, 
-    postSmurfs 
+    postSmurfs,
+    putSmurfs
 } from '../actions'
 
 const initialState = 
@@ -14,7 +19,10 @@ const initialState =
     smurfs: [],
     isFetching: false,
     error: "",
-    isPosting: false
+    isPosting: false,
+    isEditing: false,
+    editingID: '',
+    isPutting: false
 }
 
 export const reducer = (state = initialState, action) =>
@@ -52,13 +60,38 @@ export const reducer = (state = initialState, action) =>
                 ...state,
                 isPosting: false,
                 error: "",
-                smurfs: [...state.smurfs, action.payload]
+                
             }
         case POST_SMURF_FAIL:
             return {
                 ...state,
                 isPosting: false,
                 error: action.payload,
+            }
+        case SET_SMURF_EDITING:
+            return {
+                ...state,
+                isEditing: !state.isEditing,
+                editingID: state.isEditing ? '' : action.payload
+            }
+        case PUT_SMURF_START:
+            return {
+                ...state,
+                isEditing: false,
+                editingID: '',
+                isPutting: true,
+                error: ''
+            }
+        case PUT_SMURF_SUCCESS:
+            return {
+                ...state,
+                isPutting: false
+            }
+        case PUT_SMURF_FAIL:
+            return {
+                ...state,
+                isPutting: false,
+                error: action.payload
             }
         default:
             return state

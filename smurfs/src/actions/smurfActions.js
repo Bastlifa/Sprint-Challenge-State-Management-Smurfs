@@ -11,6 +11,7 @@ export const PUT_SMURF_FAIL = "PUT_SMURF_FAIL"
 export const DELETE_SMURF_START = "DELETE_SMURF_START"
 export const DELETE_SMURF_SUCCESS = "DELETE_SMURF_SUCCESS"
 export const DELETE_SMURF_FAIL = "DELETE_SMURF_FAIL"
+export const SET_SMURF_EDITING = "SET_SMURF_EDITING"
 
 export const getSmurfs = _ => dispatch =>
 {
@@ -25,7 +26,7 @@ export const getSmurfs = _ => dispatch =>
         )
         .catch(err => 
             {
-                console.log(err)
+                console.log("err, err.results", err, err.results)
                 dispatch({ type: FETCH_SMURF_FAIL, payload: err.results })
             }
         )
@@ -45,8 +46,33 @@ export const postSmurfs = newSmurf => dispatch =>
         )
         .catch(err => 
             {
-                console.log(err)
+                console.log("err, err.results", err, err.results)
                 dispatch({ type: POST_SMURF_FAIL, payload: err })
             }
         )
+}
+
+export const putSmurfs = updatedSmurf => dispatch =>
+{
+    console.log('updatedSmurf', updatedSmurf)
+    dispatch({ type: PUT_SMURF_START })
+    axios
+        .put(`http://localhost:3333/smurfs/${updatedSmurf.id}`, updatedSmurf)
+        .then(res =>
+            {
+                console.log(res)
+                dispatch({ type: PUT_SMURF_SUCCESS})
+            }
+        )
+        .catch(err => 
+            {
+                console.log("err, err.results", err, err.results)
+                dispatch({ type: PUT_SMURF_FAIL, payload: err })
+            }
+        )
+}
+
+export const setEditing = id => dispatch =>
+{
+    dispatch({ type: SET_SMURF_EDITING, payload: id })
 }

@@ -2,6 +2,8 @@ export
 {
     getSmurfs,
     postSmurfs,
+    setEditing,
+    putSmurfs,
     FETCH_SMURF_START,
     FETCH_SMURF_SUCCESS,
     FETCH_SMURF_FAIL,
@@ -13,5 +15,6 @@ export
     PUT_SMURF_FAIL,
     DELETE_SMURF_START,
     DELETE_SMURF_SUCCESS,
-    DELETE_SMURF_FAIL
+    DELETE_SMURF_FAIL,
+    SET_SMURF_EDITING
 } from './smurfActions'

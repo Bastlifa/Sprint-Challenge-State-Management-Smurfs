@@ -7,8 +7,6 @@ const SmurfCards = _ =>
 {
     const state = useSelector(state => state)
 
-    
-
     return (
         <SmurfCardsDiv>
             {state.smurfs && state.smurfs.length > 0 && state.smurfs.map(smurf => <SmurfCard smurf={smurf} key={smurf.name} />)}
