@@ -1,12 +1,13 @@
 import React, {useState} from "react"
 import {useSelector, useDispatch} from "react-redux"
 import {getSmurfs, postSmurfs} from "../actions"
+import { SmurfForm, SmurfButton } from './StyledComps'
 
 const NewSmurfForm = _ =>
 {
     const dispatch = useDispatch()
     const state = useSelector(state => state)
-    
+
     const [smurfInput, setSmurfInput] = useState({name: '', age: '', height: '', id: state.smurfs.length})
 
     const getBtnClick = event =>
@@ -21,17 +22,18 @@ const NewSmurfForm = _ =>
         setSmurfInput({...smurfInput, [event.target.name]: event.target.value})
     }
 
-    const handleSubmit = event =>
+    const handleSubmit = async event =>
     {
         console.log('newSmurf', smurfInput)
         event.preventDefault()
-        dispatch(postSmurfs(smurfInput))
+        await dispatch(postSmurfs(smurfInput))
+        dispatch(getSmurfs())
     }
 
     return (
         <>
-            <button onClick={getBtnClick}>Get Smurfs</button>
-        <form>
+            <SmurfButton onClick={getBtnClick}>Get Smurfs</SmurfButton>
+        <SmurfForm>
             <label>
                 Smurf Name:
                 <input type="text" name="name" value={smurfInput.name} onChange={handleChange} />
@@ -44,8 +46,8 @@ const NewSmurfForm = _ =>
                 Smurf Height:
                 <input type="text" name="height" value={smurfInput.height} onChange={handleChange}/>
             </label>
-            <button type="submit" onClick={handleSubmit}>Submit Smurf!</button>
-        </form>
+            <SmurfButton type="submit" onClick={handleSubmit}>Submit Smurf!</SmurfButton>
+        </SmurfForm>
         </>
     )
 }

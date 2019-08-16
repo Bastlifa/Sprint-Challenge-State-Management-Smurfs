@@ -18,3 +18,33 @@ export const SmurfCardsDiv = styled.div`
     grid-gap: 40px;
     margin: 20px 40px;
 `;
+
+export const SmurfForm = styled.form`
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 20px auto;
+    align-items: flex-end;
+    width: 200px;
+    label
+    {
+        margin: 5px auto;
+    }
+    input
+    {
+        background: skyblue;
+        text-align: center;
+    }
+    
+`;
+
+export const SmurfButton = styled.button`
+    width: 175px;
+    background: skyblue;
+    margin: 5px auto;
+    height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 6px;
+`;
