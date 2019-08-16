@@ -39,8 +39,6 @@ export const SmurfForm = styled.form`
             width: 156px;
         }
     }
-    
-    
 `;
 
 export const SmurfButton = styled.button`
@@ -53,4 +51,8 @@ export const SmurfButton = styled.button`
     border-width: 2px;
     border-color: black;
     border-radius: 6px;
+`;
+
+export const ErrorP = styled.p`
+    color: red;
 `;

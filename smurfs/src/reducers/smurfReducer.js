@@ -39,7 +39,7 @@ export const reducer = (state = initialState, action) =>
             return {
                 ...state,
                 isFetching: false,
-                error: "",
+                // error: "",
                 smurfs: action.payload
             }
         case FETCH_SMURF_FAIL:

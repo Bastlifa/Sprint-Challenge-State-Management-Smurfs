@@ -26,8 +26,8 @@ export const getSmurfs = _ => dispatch =>
         )
         .catch(err => 
             {
-                console.log("err, err.results", err, err.results)
-                dispatch({ type: FETCH_SMURF_FAIL, payload: err.results })
+                console.log("err", err)
+                dispatch({ type: FETCH_SMURF_FAIL, payload: err.response.data.Error })
             }
         )
 }
@@ -46,8 +46,8 @@ export const postSmurfs = newSmurf => dispatch =>
         )
         .catch(err => 
             {
-                console.log("err, err.results", err, err.results)
-                dispatch({ type: POST_SMURF_FAIL, payload: err })
+                console.log("err blah", err)
+                dispatch({ type: POST_SMURF_FAIL, payload: err.response.data.Error })
             }
         )
 }
@@ -66,8 +66,8 @@ export const putSmurfs = updatedSmurf => dispatch =>
         )
         .catch(err => 
             {
-                console.log("err, err.results", err, err.results)
-                dispatch({ type: PUT_SMURF_FAIL, payload: err })
+                console.log("err", err)
+                dispatch({ type: PUT_SMURF_FAIL, payload: err.response.data.Error })
             }
         )
 }

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import {useSelector, useDispatch} from "react-redux"
 import {getSmurfs, postSmurfs, putSmurfs} from "../actions"
-import { SmurfForm, SmurfButton } from './StyledComps'
+import { SmurfForm, SmurfButton, ErrorP } from './StyledComps'
 
 const NewSmurfForm = _ =>
 {
@@ -34,7 +34,6 @@ const NewSmurfForm = _ =>
 
     const handleSubmit = async event =>
     {
-        console.log('newSmurf', smurfInput)
         event.preventDefault()
         if(!state.isEditing)
         {
@@ -66,6 +65,8 @@ const NewSmurfForm = _ =>
             </label>
             <SmurfButton type="submit" onClick={handleSubmit}>{state.isEditing ? `Edit Smurf!` : `Submit Smurf!`}</SmurfButton>
         </SmurfForm>
+        {/* <ErrorP>{state.error.response.Error}</ErrorP> */}
+        {state.error ? <ErrorP>{state.error}</ErrorP> : null}
         </>
     )
 }
