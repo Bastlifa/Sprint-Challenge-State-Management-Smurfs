@@ -8,7 +8,7 @@ const SmurfCard = props =>
     
     const dispatch = useDispatch()
 
-    const handleClick = _ =>
+    const handleClick = event =>
     {
         dispatch(setEditing(props.smurf.id))
     }
